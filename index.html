@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f4f0">
+  <title>For you ♡</title>
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100svh; overflow: hidden;
+      display: grid; place-items: center;
+      background:
+        radial-gradient(ellipse at 18% 15%, rgba(224,190,179,.22), transparent 38%),
+        radial-gradient(ellipse at 82% 82%, rgba(205,174,165,.20), transparent 40%),
+        #f8f4f0;
+      color: #433936;
+      font-family: "Georgia", "Times New Roman", serif;
+    }
+    .grain { position: fixed; inset: 0; pointer-events: none; opacity: .14;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E"); }
+    main { position: relative; z-index: 2; width: min(90vw, 520px); padding: 58px 28px 54px;
+      text-align: center; border: 1px solid rgba(128,102,92,.18);
+      background: rgba(255,253,250,.72); backdrop-filter: blur(8px);
+      box-shadow: 0 24px 80px rgba(91,67,57,.08); animation: arrive 1.2s ease both; }
+    .eyebrow { margin: 0 0 25px; text-transform: uppercase; letter-spacing: .28em;
+      font: 10px/1.5 Arial, sans-serif; color: #9b8177; }
+    h1 { margin: 0; font-size: clamp(42px, 10vw, 64px); font-weight: 400;
+      letter-spacing: -.045em; color: #584640; }
+    .heart { display: inline-block; color: #b77d78; font-family: Arial, sans-serif;
+      font-size: .72em; vertical-align: .08em; animation: pulse 2.2s ease-in-out infinite; }
+    .rule { width: 42px; height: 1px; background: #c8aaa0; margin: 30px auto 24px; }
+    .note { margin: 0; font-size: 16px; letter-spacing: .04em; color: #927a71; }
+    .signature { margin: 36px 0 0; font: 10px Arial, sans-serif; letter-spacing: .22em;
+      text-transform: uppercase; color: #ad9890; }
+    .float-heart { position: fixed; z-index: 1; bottom: -40px; color: #c18d86;
+      opacity: 0; pointer-events: none; animation: floatUp linear forwards; }
+    @keyframes arrive { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.18); } }
+    @keyframes floatUp { 0% { transform: translateY(0) rotate(-8deg); opacity: 0; }
+      12% { opacity: .5; } 85% { opacity: .35; } 100% { transform: translateY(-110vh) rotate(18deg); opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+  <main>
+    <p class="eyebrow">a little reminder</p>
+    <h1>I love you <span class="heart">♥</span></h1>
+    <div class="rule"></div>
+    <p class="note">Today, tomorrow, and all the days after.</p>
+    <p class="signature">just for you</p>
+  </main>
+  <script>
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduced) {
+      function heart() {
+        const el = document.createElement('span');
+        el.className = 'float-heart';
+        el.textContent = Math.random() > .5 ? '♡' : '♥';
+        el.style.left = (5 + Math.random() * 90) + 'vw';
+        el.style.fontSize = (12 + Math.random() * 15) + 'px';
+        el.style.animationDuration = (9 + Math.random() * 7) + 's';
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 17000);
+      }
+      setInterval(heart, 1150);
+    }
+  </script>
+</body>
+</html>
